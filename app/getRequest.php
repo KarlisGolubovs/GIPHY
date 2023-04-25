@@ -16,7 +16,7 @@ class getApiClient
 
     public function fetchData(string $apiKey, string $searchTerm) : array
     {
-        $url = "https://api.giphy.com/v1/gifs/search?api_key=$apiKey&q=$searchTerm&limit=25&offset=0&rating=g&lang=en";
+        $url = "https://api.giphy.com/v1/gifs/search?api_key=" . getenv('API_KEY') . "&q=&limit=25&offset=0&rating=g&lang=en";
         try {
             $res = $this->client->request('GET', $url, [
                 'headers' => [
@@ -27,5 +27,13 @@ class getApiClient
         } catch (GuzzleException $e) {
             return [];
         }
+    }
+    public function processGifs(array $gifs) : string
+    {
+        $html = '';
+        foreach ($gifs['data'] as $gif) {
+            $html .= '<img src="' . $gif['images']['original']['url'] . '" alt="' . $gif['title'] . '">';
+        }
+        return $html;
     }
 }

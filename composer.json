@@ -2,7 +2,7 @@
     "name": "karli/giphy",
     "autoload": {
         "psr-4": {
-            "App": "app/"
+            "App\\": "app/"
         }
     },
     "authors": [
@@ -12,6 +12,8 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "*"
+        "guzzlehttp/guzzle": "*",
+        "vlucas/phpdotenv": "^5.5",
+      "ext-json": "*"
     }
 }
