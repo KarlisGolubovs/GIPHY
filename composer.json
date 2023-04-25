@@ -1,0 +1,17 @@
+{
+    "name": "karli/giphy",
+    "autoload": {
+        "psr-4": {
+            "App": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "KarlisGolubovs",
+            "email": "karlisgolubovs@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "*"
+    }
+}
