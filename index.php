@@ -1,11 +1,14 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-use App\GiphyApp;
+use App\ApiClientRequest;
+use App\GifProcessor;
 
-$searchTerm = $_GET['searchTerm'] ?? '';
-$giphy = new GiphyApp();
-$apiKey = getenv('API_KEY');
-$gifs = $giphy->fetchData($apiKey, $searchTerm);
-$html = $giphy->processGifs($gifs);
+$apiClient = new ApiClientRequest();
+$data = $apiClient->fetchData();
+
+$gifProcessor = new GifProcessor();
+$html = $gifProcessor->processGifs($data);
+
+echo $html;

@@ -5,7 +5,7 @@ namespace App;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class GiphyApp
+class ApiClientRequest
 {
     private Client $client;
 
@@ -14,7 +14,7 @@ class GiphyApp
         $this->client = new Client;
     }
 
-    public function fetchData(string $apiKey, string $searchTerm) : array
+    public function fetchData() : array
     {
         $url = "https://api.giphy.com/v1/gifs/search?api_key=" . getenv('API_KEY') . "&q=&limit=25&offset=0&rating=g&lang=en";
         try {
@@ -27,13 +27,5 @@ class GiphyApp
         } catch (GuzzleException $e) {
             return [];
         }
-    }
-    public function processGifs(array $gifs) : string
-    {
-        $html = '';
-        foreach ($gifs['data'] as $gif) {
-            $html .= '<img src="' . $gif['images']['original']['url'] . '" alt="' . $gif['title'] . '">';
-        }
-        return $html;
     }
 }
