@@ -5,7 +5,7 @@ namespace App;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
-class getApiClient
+class GiphyApp
 {
     private Client $client;
 
