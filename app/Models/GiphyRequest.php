@@ -15,7 +15,7 @@ class GiphyRequest
         $this->client = new Client([
             'base_uri' => 'https://api.giphy.com/v1/',
         ]);
-        $this->apiKey = getenv('API_KEY');
+        $this->apiKey = $_ENV['API_KEY'] ?? '';
     }
 
     public function search(string $query, int $limit = 25, int $offset = 0): array

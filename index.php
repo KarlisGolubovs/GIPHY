@@ -2,10 +2,8 @@
 
 use App\Controllers\Router;
 use Twig\Environment;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
+use Twig\Error\{LoaderError, RuntimeError, SyntaxError};
 
 require __DIR__ . '/vendor/autoload.php';
 
