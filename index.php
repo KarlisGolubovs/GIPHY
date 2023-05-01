@@ -1,17 +1,19 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
-include_once('index.html');
+use App\Controllers\Router;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
 
-use App\ApiClientRequest;
-use App\GifProcessor;
+require __DIR__ . '/vendor/autoload.php';
 
-if (isset($_GET['searchTerm'])) {
-    $apiClient = new ApiClientRequest();
-    $data = $apiClient->fetchData();
+$loader = new FilesystemLoader(__DIR__ . '/app/View');
+$twig = new Environment($loader);
 
-    $gifProcessor = new GifProcessor();
-    $html = $gifProcessor->processGifs($data);
-
-    echo $html;
+$router = new Router($twig);
+try {
+    $router->handleRequest();
+} catch (LoaderError|SyntaxError|RuntimeError $e) {
 }
