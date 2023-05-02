@@ -6,6 +6,9 @@ use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Giphy\Models\AppClient;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use function FastRoute\simpleDispatcher;
 
 class Router
@@ -43,10 +46,15 @@ class Router
         }
     }
 
-    public function home()
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    public function home(): string
     {
         $template = $this->twig->load('home.twig');
-        echo $template->render();
+        return $template->render();
     }
 
     public function search()
