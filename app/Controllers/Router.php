@@ -5,6 +5,7 @@ namespace Giphy\Controllers;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Giphy\Models\AppClient;
+use GuzzleHttp\Exception\GuzzleException;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -21,7 +22,7 @@ class Router
     {
         $this->gifProcessor = new GifProcessor($appClient);
         $this->dispatcher = simpleDispatcher(function (RouteCollector $r) {
-            $r->get('/', [$this, 'home']);
+            $r->get('/home', [$this, 'home']);
             $r->post('/search', [$this, 'search']);
             $r->get('/trending', [$this, 'trending']);
         });
@@ -60,12 +61,15 @@ class Router
     public function search()
     {
         $search = $_POST['search'] ?? '';
-        $gifs = $this->gifProcessor->searchGif($search);
+        $this->gifProcessor->searchGif($search);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function trending()
     {
-        $gifs = $this->gifProcessor->getTrendingGifs();
+        $this->gifProcessor->getTrendingGifs();
     }
 
     private function show404()
