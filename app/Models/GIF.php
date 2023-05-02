@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Models;
+namespace Giphy\Models;
 
-class GifPropperties
+class GIF
 {
     private string $url;
 
@@ -10,8 +10,7 @@ class GifPropperties
     {
         $this->url = $url;
     }
-
-    public function returnUrl(): string
+    public function getUrl(): string
     {
         return $this->url;
     }

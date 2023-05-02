@@ -1,17 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
-use App\Controllers\Router;
+use Giphy\Controllers\Router;
+use Giphy\Models\AppClient;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-use Twig\Error\{LoaderError, RuntimeError, SyntaxError};
 
-require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-$loader = new FilesystemLoader(__DIR__ . '/app/View');
+$loader = new FilesystemLoader(__DIR__ . '/views');
 $twig = new Environment($loader);
 
-$router = new Router($twig);
-try {
-    $router->handleRequest();
-} catch (LoaderError|SyntaxError|RuntimeError $e) {
-}
+$router = new Router(new AppClient(), $twig);
+
+$router->handleRequest($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
